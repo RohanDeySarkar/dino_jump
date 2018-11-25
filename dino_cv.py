@@ -15,8 +15,13 @@ while capture.isOpened():
     blur = cv2.GaussianBlur(crop_image, (3,3), 0)
 
     hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
-
-    mask2 = cv2.inRange(hsv, np.array([2,0,0]), np.array([20,255,255]))
+    
+    upper = np.array([20,255,255])
+    lower = np.array([2,0,0])
+    
+    # Create a binary image with where white will be skin colors and rest is black
+    mask2 = cv2.inRange(hsv, lower, upper)
+    
 
     kernel = np.ones((5,5)) # default val see opencv_tuts
 
